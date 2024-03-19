@@ -12,8 +12,7 @@ const cartService = new CartService();
 
 router.get('/', async (req, res) => {
     try {
-        
-        let prods = await productManager.getProducts( limit, page, sort, query)
+        let prods = await productManager.getProducts()
         res.render('home', prods)
     } catch (error) {
         console.error(`Error processing request: ${error}`)
