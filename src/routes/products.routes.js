@@ -39,7 +39,7 @@ router.get('/:pid', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         let prod = req.body
-        // console.log(`esto es el req: ${JSON.stringify(req)}`)
+
         console.log(`esto es del post ${JSON.stringify(prod)}`)
         await productService.addProduct(prod)
         res.status(201).send({ message: "Producto agregado con exito" });

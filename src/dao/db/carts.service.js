@@ -48,14 +48,10 @@ export default class CartService {
             } else {
                 cartExists.products.push({ product: prodId, quantity: 1 })
             }
-
             let result = await cartExists.save()
-
-            console.log(JSON.stringify(cartExists, null, '\t'));
-
             return result
         } catch (error) {
-            console.error(`Error eliminando del carrito: ${error}`)
+            console.error(`Error agregando al carrito: ${error}`)
         }
 
     };
@@ -118,6 +114,20 @@ export default class CartService {
         } catch (error) {
             console.error(`Error actualizando el carrito: ${error}`)
         }
+    }
 
+    updateCart = async (cartId) =>{
+        try{
+            let cartExists = await cartsModel.findById(cartId)
+            if (!cartExists) {
+                throw new Error(`No existe el carrito`)
+            }
+            let result = await cartsModel.findByIdAndUpdate(cartId, {}, { new: true }).populate('products.product').lean()
+            console.log(result)
+            
+            return result
+        } catch (error){
+            console.error(`Error actualizando el carrito: ${error}`)
+        }
     }
 }

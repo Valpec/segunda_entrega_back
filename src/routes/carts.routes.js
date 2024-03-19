@@ -72,7 +72,10 @@ router.delete('/:cid', async(req, res) => {
 //PUT actualiza el carrito con un arreglo de prods con el formato de paginacion???
 router.put('/:cid', async(req, res) => {
     try{
+        let cid = req.params.cid
+        await cartService.updateCart(cid)
 
+        res.status(200).send({ message: "Carrito actualizado con exito" });
     } catch(error){
         res.status(400).send({error: "400", message: "El id es invalido o no existe"});
     }
