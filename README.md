@@ -1,6 +1,7 @@
 **Segunda Pre entrega**
 
 En este proyecto, se puede acceder a tres views principales:
+
     - /products
         - Aqui se pueden visualizar todos los productos existentes
         - Desde aque puede acceder al detalle de cada uno y agregar al carrito fijo*
