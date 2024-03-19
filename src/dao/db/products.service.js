@@ -10,7 +10,6 @@ export default class ProductService {
         try {
             if (!limit) limit = 10
             if (!page) page = 1
-
             let options = { limit: limit, page, lean: true }
 
             if (sort) {
@@ -25,15 +24,14 @@ export default class ProductService {
                     queryObj = {category: query}
                 }
             }
-            console.log(query)
-
             let result = await productsModel.paginate( queryObj, options)
-            console.log(options)
+            
             result.prevLink = result.hasPrevPage ? `http://localhost:8080/products?page=${result.prevPage}${limit ? `&limit=${limit}` : ''}${sort ? `&sort=${sort}` : ''}${query ? `&query=${query}` : ''}` : '';
             result.nextLink = result.hasNextPage ? `http://localhost:8080/products?page=${result.nextPage}${limit ? `&limit=${limit}` : ''}${sort ? `&sort=${sort}` : ''}${query ? `&query=${query}` : ''}` : '';
 
             result.isValid = !(page < 1 || page > result.totalPages)
             return result
+            
         } catch (error) {
             console.error(`Error leyendo los productos: ${error}`)
 

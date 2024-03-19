@@ -27,15 +27,14 @@ router.get('/:cid', async(req,res) => {
         res.send(await cartService.listCartProds(cid))
     } catch(error){
         res.status(400).send({error: "400", message: "El id es invalido o no existe"});
-    }
-    
+    } 
 })
 
+// POST de cada producto en el carrito. En el caso de ya existir, aumenta su cantidad en uno
 router.post('/:cid/product/:pid', async(req,res) => {
     try{
         let cid = req.params.cid
         let pid = req.params.pid
-
         await cartService.addToCart(cid, pid)
         res.status(201).send({message: "Producto agregado con exito"});
     } catch(error){
@@ -44,7 +43,7 @@ router.post('/:cid/product/:pid', async(req,res) => {
     
 })
 
-//DELETE del producto seleccionado
+//DELETE del producto seleccionado del carrito
 router.delete('/:cid/product/:pid', async(req, res) => {
     try{
         let cid = req.params.cid
@@ -69,7 +68,7 @@ router.delete('/:cid', async(req, res) => {
     }
 })
 
-//PUT actualiza el carrito con un arreglo de prods con el formato de paginacion???
+//PUT actualiza el carrito con un arreglo de prods con el formato de paginacion
 router.put('/:cid', async(req, res) => {
     try{
         let cid = req.params.cid

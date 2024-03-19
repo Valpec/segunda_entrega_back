@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
         let query  = req.query.query;
 
         let prods = await productService.getProducts(limit, page, sort, query)
-        console.log(prods)
+
         res.send(prods)
     } catch (error) {
         console.error(`Error processing request: ${error}`)
@@ -40,7 +40,6 @@ router.post('/', async (req, res) => {
     try {
         let prod = req.body
 
-        console.log(`esto es del post ${JSON.stringify(prod)}`)
         await productService.addProduct(prod)
         res.status(201).send({ message: "Producto agregado con exito" });
     } catch (error) {
@@ -66,8 +65,6 @@ router.delete('/:pid', async (req, res) => {
     try {
         let pid = req.params.pid
         let body = req.body
-        console.log(`esto es el pid${pid}`)
-        console.log(`esto es el body${body}`)
         if(pid){
         await productService.deleteProduct(pid)
 

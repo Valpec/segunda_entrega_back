@@ -123,8 +123,7 @@ export default class CartService {
                 throw new Error(`No existe el carrito`)
             }
             let result = await cartsModel.findByIdAndUpdate(cartId, {}, { new: true }).populate('products.product').lean()
-            console.log(result)
-            
+
             return result
         } catch (error){
             console.error(`Error actualizando el carrito: ${error}`)
